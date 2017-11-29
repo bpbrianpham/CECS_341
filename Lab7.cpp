@@ -40,13 +40,22 @@ matrix[2][2](0x61ff14) = 8 => 00001000 | 00000000 | 00000000 | 00000000
 ------------------------------------------------------------------------
 */
 #include <iostream>
+#include <cstdlib>
+#include <bitset>
+#include <stdlib.h>
 using namespace std;
 #define rows 3
 #define cols 3
 
 void printMemory(int matrix[][cols]) {
 	//Your code from here
-
+	for (int row = 0; row < rows; row++){
+		for(int col = 0; col < cols; col++){
+			cout << "matrix[" << row << "][" << col << "](" << &matrix[row][col] << ")";
+			cout << " = " << matrix[row][col] << " => ";
+			cout <<bitset<32>(matrix[row][col]).to_string() << "\n";
+		}
+	}
 	//Your code to here
 }
 
@@ -66,8 +75,14 @@ int main() {
 		}
 		cout << endl;			
 	}
+	
+	
 	cout << "2D array information\n";
 	printMemory(matrix);
+	/*
 	cout << "2D array information by 1D version\n";
 	printMemory1D(matrix[0]);
+	*/
+	system("Pause");
+	return 0;
 }
