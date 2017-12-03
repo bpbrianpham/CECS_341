@@ -80,10 +80,14 @@ void printMemory(int matrix[][cols]) {
 				}
 			}
 
-			string bitRepresentation(bits);
+			string bitRep(bits);
 
-			bitRepresentation = bitRepresentation.substr(0, 32);
-			cout << "matrix[" << i << "]" << "[" << j << "]" << "(0x" << memAddress << ") = " << matrix[i][j] << " =>   " << bitRepresentation <<endl;
+			bitRep = bitRep.substr(0, 32);
+			for (int l = bitRep.length() - 8; l > 0; l = l - 8){
+				bitRep = bitRep.insert(l, " | ");
+			}
+			cout << "matrix[" << i << "]" << "[" << j << "]" << "(0x" << memAddress << ") = " 
+					<< matrix[i][j] << " =>   " << bitRep <<endl;
 		}
 	}
 	//Your code to here
@@ -122,10 +126,14 @@ void printMemory1D(int matrix[]) {
 			}
 		}
 
-		string bitRepresentation(bits);
+		string bitRep(bits);
 
-		bitRepresentation = bitRepresentation.substr(0, 32);
-		cout << "matrix[" << j << "]" << "(0x" << memAddress << ") = " << matrix[j] << " =>   " << bitRepresentation << endl;
+		bitRep = bitRep.substr(0, 32);
+		for (int l = bitRep.length() - 8; l > 0; l = l - 8){
+				bitRep = bitRep.insert(l, " | ");
+			}
+		cout << "matrix[" << j << "]" << "(0x" << memAddress << ") = " 
+				<< matrix[j] << " =>   " << bitRep << endl;
 	}
 	//Your code to here
 }
