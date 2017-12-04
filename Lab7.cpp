@@ -55,29 +55,21 @@ void printMemory(int matrix[][cols]) {
 			char bits[32];
 			bool negative = (num < 0);	//used for 2's Complement
 			num = abs(num);	//change to positive for easier binary conversion from int
-			int indexOfFirstOne = 0;	//used for 2's Complement
-
-			for (int k = 0; k < 32; k++) bits[k] = '0';	//32 bit array
 			
-			int ind = 0;
-			while (num > 0) {
-				if (num % 2 == 0) bits[ind] = '0';
-				else {
-					bits[ind] = '1';
-					if (indexOfFirstOne == 0) indexOfFirstOne = ind; //only changes when first instance of '1'
+			for (int k = 0; k < 32; k++) bits[k] = '0';	//32 bit array
+			if(negative) num -= 1;
+
+			for(int s = 1; s <= 4; s++){
+				for(int t = 8; t >= 1; t--){
+					if(num % 2 == 1) 
+						bits[(t*s) - 1] = '1';
+					num /= 2;
 				}
-
-				ind++;
-
-				num /= 2;
 			}
 
-			if (negative) {	//Only runs for negative numbers
-				int negInd = indexOfFirstOne + 1; 
-				while (negInd < 32) {
-					bits[negInd] = (bits[negInd] == '0') ? '1' : '0';
-					negInd++;
-				}
+			if(negative){
+				for(int s = 0; s < 32; s++)
+					bits[s] = (bits[s] == '0') ? '1':'0';
 			}
 
 			string bitRep(bits);
@@ -101,29 +93,21 @@ void printMemory1D(int matrix[]) {
 		char bits[32];
 		bool negative = (num < 0);	//used for 2's Complement
 		num = abs(num);	//change to positive for easier binary conversion from int
-		int indexOfFirstOne = 0;	//used for 2's Complement
 
-		for (int i = 0; i < 32; i++) bits[i] = '0';	//32 bit array
+		for (int k = 0; k < 32; k++) bits[k] = '0';	//32 bit array
+		if(negative) num -= 1;
 
-		int ind = 0;
-		while (num > 0) {
-			if (num % 2 == 0) bits[ind] = '0';
-			else {
-				bits[ind] = '1';
-				if (indexOfFirstOne == 0) indexOfFirstOne = ind; //only changes when first instance of '1'
+		for(int s = 1; s <= 4; s++){
+			for(int t = 8; t >= 1; t--){
+				if(num % 2 == 1) 
+					bits[(t*s) - 1] = '1';
+				num /= 2;
 			}
-
-			ind++;
-
-			num /= 2;
 		}
 
-		if (negative) {	//Only runs for negative numbers
-			int negInd = indexOfFirstOne + 1;
-			while (negInd < 32) {
-				bits[negInd] = (bits[negInd] == '0') ? '1' : '0';
-				negInd++;
-			}
+		if(negative){
+			for(int s = 0; s < 32; s++)
+				bits[s] = (bits[s] == '0') ? '1':'0';
 		}
 
 		string bitRep(bits);
